@@ -1,8 +1,13 @@
+"use client"
 import Link from 'next/link';
 import Image from "next/image";
 import styles from "./app.module.css";
+import {useAuth} from "@/hooks/useAuth";
+import {RiDashboardFill} from "react-icons/ri";
 
 export default function Home() {
+    const {user} = useAuth();
+
     return (
         <div className={styles.page}>
             <main className={styles.main}>
@@ -19,33 +24,27 @@ export default function Home() {
                 </div>
                 <div>
                     <p>Welcome To Coinersho.</p>
-                    <p>Choose One Of The Options Below.</p>
                 </div>
 
-                {/*go to /dashboard*/}
                 <div className={styles.ctas}>
-                    <Link
-                        className={styles.primary}
-                        href="dashboard"
-                        rel="noopener noreferrer"
-                    >
-                        <Image
-                            className={styles.logo}
-                            src="/assets/images/others/vercel.svg"
-                            alt="coinersho logomark"
-                            width={20}
-                            height={20}
-                        />
-                        Dashboard
-                    </Link>
-                    {/*go to /auth*/}
-                    <Link
-                        href="auth"
-                        rel="noopener noreferrer"
-                        className={styles.secondary}
-                    >
-                        Login
-                    </Link>
+                    {user ?
+                        // go to /dashboard
+                        <Link
+                            className={styles.primary}
+                            href="dashboard"
+                            rel="noopener noreferrer"
+                        >
+                            <RiDashboardFill title="dashboard"/>
+                            Dashboard
+                        </Link> :
+                        // go to /auth
+                        <Link
+                            href="auth"
+                            rel="noopener noreferrer"
+                            className={styles.secondary}
+                        >
+                            Login
+                        </Link>}
                 </div>
             </main>
             <footer className={styles.footer}>

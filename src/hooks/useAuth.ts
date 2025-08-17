@@ -2,6 +2,7 @@
 import {useRouter} from "next/navigation";
 import {useState} from "react";
 import {User} from "@/types/types";
+import {toast} from "react-toastify"
 
 export function useAuth() {
     const [user, setUser] = useState<User | null>(() => {
@@ -17,6 +18,7 @@ export function useAuth() {
         localStorage.setItem("user", JSON.stringify(user));
         setUser(user);
         router.push("/dashboard");
+        toast.success("successfully logged in!");
     };
 
     const logout = () => {
