@@ -1,6 +1,5 @@
 "use client";
-
-import { forwardRef, InputHTMLAttributes } from "react";
+import {forwardRef, InputHTMLAttributes} from "react";
 import styles from "./Input.module.scss";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,7 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ label, error, ...props }, ref) => {
+    ({label, error, ...props}, ref) => {
         return (
             <div className={styles.wrapper}>
                 <label className={styles.label}>{label}</label>

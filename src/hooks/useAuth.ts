@@ -1,17 +1,17 @@
 "use client";
-
 import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {User} from "@/types/types";
 
 export function useAuth() {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User | null>(() => {
+        if (typeof window !== "undefined") {
+            const savedUser = localStorage.getItem("user");
+            return savedUser ? JSON.parse(savedUser) : null;
+        }
+        return null;
+    });
     const router = useRouter();
-
-    useEffect(() => {
-        const savedUser = localStorage.getItem("user");
-        if (savedUser) setUser(JSON.parse(savedUser));
-    }, []);
 
     const login = (user: User) => {
         localStorage.setItem("user", JSON.stringify(user));

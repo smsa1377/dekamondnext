@@ -6,6 +6,7 @@ import {useAuth} from "@/hooks/useAuth";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import styles from "./auth.module.scss";
+import {UserResponse} from "@/types/types";
 
 export default function AuthPage() {
     const {login} = useAuth();
@@ -18,22 +19,26 @@ export default function AuthPage() {
     });
 
     const onSubmit = async () => {
-        // const res = await fetch("https://randomuser.me/api/?results=1&nat=us");
-        const res = await fetch("@/data/api.json");
-        const data = await res.json();
+        const res = await fetch("https://randomuser.me/api/?results=1&nat=us");
+        // const res = await fetch("/data/api.json");
+        const data: UserResponse = await res.json();
         const user = data.results[0];
-        login({
-            name: user.name,
-            email: user.email,
-        });
+        login(user);
+        //     const data = await res.json();
+        //     const user = data.results[0];
+        //     login({
+        //         name: user.name,
+        //         email: user.email,
+        //     });
     };
 
     return (
         <div className={styles.container}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                <h2>Login Page</h2>
+                <h2 className={styles.h2}>Login Page</h2>
                 <Input
                     label="Phone Number"
+                    placeholder="09123456789"
                     type="text"
                     {...register("phone")}
                     error={errors.phone?.message}

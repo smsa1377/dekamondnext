@@ -1,9 +1,9 @@
-interface UserResponse {
+export interface UserResponse {
     results: User[];
     info: Info;
 }
 
-interface User {
+export interface User {
     gender: string;
     name: {
         title: string;
@@ -60,7 +60,7 @@ interface User {
     nat: string;
 }
 
-interface Info {
+export interface Info {
     seed: string;
     results: number;
     page: number;
